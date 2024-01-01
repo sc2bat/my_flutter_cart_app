@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_flutter_cart_app/ui/page/catalog_page.dart';
 
 class LoginScreenPage extends StatefulWidget {
   const LoginScreenPage({super.key});
@@ -16,7 +17,14 @@ class _LoginScreenPageState extends State<LoginScreenPage> {
       ),
       body: Center(
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const CatalogPage(),
+              ),
+            );
+          },
           child: const Text(
             'Login Button',
           ),
