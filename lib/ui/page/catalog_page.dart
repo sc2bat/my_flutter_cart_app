@@ -43,6 +43,12 @@ class _CatalogPageState extends State<CatalogPage> {
         subtitle: Text(
           '${item.price}',
         ),
+        trailing: const IconButton(
+          onPressed: null,
+          icon: Icon(
+            Icons.check,
+          ),
+        ),
       ),
     );
   }
