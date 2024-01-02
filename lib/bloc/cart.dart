@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_flutter_cart_app/bloc/cart_bloc.dart';
+import 'package:my_flutter_cart_app/bloc/cart_provider.dart';
 import 'package:my_flutter_cart_app/logger/logger.dart';
 import 'package:my_flutter_cart_app/main.dart';
 import 'package:my_flutter_cart_app/model/item.dart';
@@ -23,7 +24,7 @@ class _CartState extends State<Cart> {
         ),
       ),
       body: StreamBuilder(
-        stream: cartBloc.cartList,
+        stream: CartProvider.of(context).cartList,
         builder: (context, snapshot) {
           if (snapshot.hasData && snapshot.data is List<Item>) {
             List<Item>? list = snapshot.data as List<Item>;
