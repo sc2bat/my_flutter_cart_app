@@ -20,14 +20,17 @@ class CartBloc extends Bloc<CartEvent, List<Item>> {
   CartBloc() : super([]);
 
   Stream<List<Item>> mapEventToState(CartEvent cartEvent) async* {
+    List<Item> newState = List.from(state);
     switch (cartEvent.cartEventType) {
       case CartEventType.add:
-        state.add(cartEvent.item);
+        newState.add(cartEvent.item);
         break;
       case CartEventType.remove:
-        state.remove(cartEvent.item);
+        newState.remove(cartEvent.item);
         break;
     }
-    yield state;
+    // yield state;
+
+    yield newState;
   }
 }

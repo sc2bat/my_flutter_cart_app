@@ -12,12 +12,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cartBloc = CartBloc();
     return BlocProvider(
-      create: (context) => cartBloc,
-      child: BlocBuilder(
-        bloc: cartBloc,
-        builder: (context, state) => MaterialApp(
+      create: (context) => CartBloc(),
+      child: BlocBuilder<CartBloc, List>(
+        // bloc: cartBloc,
+        builder: (context, List state) => MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
