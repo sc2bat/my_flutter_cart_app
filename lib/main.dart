@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CartBloc(),
+      create: (_) => CartBloc(),
       child: BlocBuilder<CartBloc, List>(
         // bloc: cartBloc,
         builder: (context, List state) => MaterialApp(

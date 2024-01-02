@@ -31,6 +31,7 @@ class CartBloc extends Bloc<CartEvent, List<Item>> {
     }
     // yield state;
 
-    yield newState;
+    // yield newState;
+    emit(newState);
   }
 }
