@@ -23,10 +23,16 @@ class _CartState extends State<Cart> {
       body: BlocBuilder(
         bloc: cartBloc,
         builder: (BuildContext context, List stateList) {
+          var sum = 0;
+          if (stateList.isNotEmpty) {
+            sum = stateList
+                .map((e) => e.price)
+                .reduce((value, element) => value + element);
+          }
           logger.info('qewrasdf stateList => ${stateList.length}');
-          return const Center(
+          return Center(
             child: Text(
-              'sum : ',
+              'sum : $sum',
             ),
           );
         },

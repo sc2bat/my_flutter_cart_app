@@ -17,21 +17,53 @@ class CartEvent {
 }
 
 class CartBloc extends Bloc<CartEvent, List<Item>> {
-  CartBloc() : super([]);
-
-  Stream<List<Item>> mapEventToState(CartEvent cartEvent) async* {
-    List<Item> newState = List.from(state);
-    switch (cartEvent.cartEventType) {
-      case CartEventType.add:
-        newState.add(cartEvent.item);
-        break;
-      case CartEventType.remove:
-        newState.remove(cartEvent.item);
-        break;
-    }
-    // yield state;
-
-    // yield newState;
-    emit(newState);
+  CartBloc() : super([]) {
+    on<CartEvent>((event, emit) {
+      switch (event.cartEventType) {
+        case CartEventType.add:
+          state.add(event.item);
+          break;
+        case CartEventType.remove:
+          state.remove(event.item);
+          break;
+      }
+      emit(state);
+    });
   }
 }
+
+
+// /// Notifies bloc to increment state.
+// class CartEventAdd extends CartEvent {
+//   CartEventAdd(super.cartEventType, super.item);
+// }
+
+// /// Notifies bloc to decrement state.
+// class CartEventRemove extends CartEvent {
+//   CartEventRemove(super.cartEventType, super.item);
+// }
+
+// /// {@template counter_bloc}
+// /// A simple [Bloc] that manages an `int` as its state.
+// /// {@endtemplate}
+// class CounterBloc extends Bloc<CartEvent, List<Item>> {
+//   /// {@macro counter_bloc}
+//   CounterBloc() : super([]) {
+//     on<CartEventAdd>((event, emit) => emit(state.add()));
+//     on<CartEventRemove>((event, emit) => emit(state.remove()));
+//   }
+// }
+
+
+//   class  mapEventToState extends CartEvent(
+//     //   CartEvent cartEvent, Emitter<List<Item>> emit) async {
+//     // switch (cartEvent.cartEventType) {
+//     //   case CartEventType.add:
+//     //     state.add(cartEvent.item);
+//     //     break;
+//     //   case CartEventType.remove:
+//     //     state.remove(cartEvent.item);
+//     //     break;
+//     // }
+//     // emit(state);
+//   }

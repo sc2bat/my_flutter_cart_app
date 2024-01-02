@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_flutter_cart_app/bloc/cart.dart';
 import 'package:my_flutter_cart_app/bloc/cart_bloc.dart';
-import 'package:my_flutter_cart_app/logger/logger.dart';
 import 'package:my_flutter_cart_app/model/item.dart';
 
 class CatalogPage extends StatefulWidget {
