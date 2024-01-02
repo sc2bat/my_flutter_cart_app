@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_flutter_cart_app/bloc/cart_bloc.dart';
 import 'package:my_flutter_cart_app/ui/page/login_screen_page.dart';
 
 void main() {
@@ -10,13 +12,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    final cartBloc = CartBloc();
+    return BlocProvider(
+      create: (context) => cartBloc,
+      child: BlocBuilder(
+        bloc: cartBloc,
+        builder: (context, state) => MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
+          ),
+          home: const LoginScreenPage(),
+        ),
       ),
-      home: const LoginScreenPage(),
     );
   }
 }
