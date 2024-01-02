@@ -1,5 +1,6 @@
 import 'package:my_flutter_cart_app/model/item.dart';
-import 'package:bloc/bloc.dart';
+// import 'package:bloc/bloc.dart';
+import 'package:rxdart/rxdart.dart';
 
 enum CartEventType {
   add,
@@ -16,54 +17,49 @@ class CartEvent {
   );
 }
 
-class CartBloc extends Bloc<CartEvent, List<Item>> {
-  CartBloc() : super([]) {
-    on<CartEvent>((event, emit) {
-      switch (event.cartEventType) {
-        case CartEventType.add:
-          state.add(event.item);
-          break;
-        case CartEventType.remove:
-          state.remove(event.item);
-          break;
-      }
-      emit(state);
-    });
+class CartBloc {
+  final itemList = [
+    Item('qqqq', 30000),
+    Item('wwwww', 80000),
+    Item('eeeee', 70000),
+    Item('ffff', 30000),
+    Item('ddddddd', 60000),
+    Item('aaaaaaaaa', 50000),
+    Item('xxxxxx', 10000),
+    Item('zzzzzz', 30000),
+  ];
+
+  final List<Item> _cartList = [];
+
+  final _cartListSubject = BehaviorSubject<List<Item>>.seeded([]);
+  Stream<List<Item>> get cartList => _cartListSubject.stream;
+
+  void add(CartEvent event) {
+    switch (event.cartEventType) {
+      case CartEventType.add:
+        _cartList.add(event.item);
+        break;
+      case CartEventType.remove:
+        _cartList.remove(event.item);
+        break;
+    }
+    _cartListSubject.add(_cartList);
   }
 }
 
-
-// /// Notifies bloc to increment state.
-// class CartEventAdd extends CartEvent {
-//   CartEventAdd(super.cartEventType, super.item);
-// }
-
-// /// Notifies bloc to decrement state.
-// class CartEventRemove extends CartEvent {
-//   CartEventRemove(super.cartEventType, super.item);
-// }
-
-// /// {@template counter_bloc}
-// /// A simple [Bloc] that manages an `int` as its state.
-// /// {@endtemplate}
-// class CounterBloc extends Bloc<CartEvent, List<Item>> {
-//   /// {@macro counter_bloc}
-//   CounterBloc() : super([]) {
-//     on<CartEventAdd>((event, emit) => emit(state.add()));
-//     on<CartEventRemove>((event, emit) => emit(state.remove()));
+// class CartBloc extends Bloc<CartEvent, List<Item>> {
+//   CartBloc() : super([]) {
+//     on<CartEvent>((event, emit) {
+//       switch (event.cartEventType) {
+//         case CartEventType.add:
+//           state.add(event.item);
+//           break;
+//         case CartEventType.remove:
+//           state.remove(event.item);
+//           break;
+//       }
+//       emit(state);
+//     });
 //   }
 // }
 
-
-//   class  mapEventToState extends CartEvent(
-//     //   CartEvent cartEvent, Emitter<List<Item>> emit) async {
-//     // switch (cartEvent.cartEventType) {
-//     //   case CartEventType.add:
-//     //     state.add(cartEvent.item);
-//     //     break;
-//     //   case CartEventType.remove:
-//     //     state.remove(cartEvent.item);
-//     //     break;
-//     // }
-//     // emit(state);
-//   }
